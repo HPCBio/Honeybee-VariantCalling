@@ -209,7 +209,7 @@ fi
             elif [ "$(ls -A /dev/shm/${USER}/refdir)" ]
             then
                 echo "#####  copy to compute node was successful. Create soft links  in compute node         ########"
-                chmod -r a+r,w /dev/shm/${USER}/refdir/
+                chmod -R a+rw /dev/shm/${USER}/refdir/
                 cd /dev/shm/${USER}/refdir/
                 ln -s /dev/shm/${USER}/refdir/$refgenome genome.fa
                 ref_local=/dev/shm/${USER}/refdir/genome.fa
@@ -217,7 +217,7 @@ fi
                 MSG="copy $refdir to COMPUTE NODE failed exitcode=$exitcode."
 	        echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS" 
 	        rm -r /dev/shm/${USER}/refdir
-	        rm -r state/partition1/$SampleName/	        
+	        rm -r /state/partition1/$SampleName/	        
                 exit $exitcode;            
             fi          
         else
@@ -284,7 +284,7 @@ fi
 	            echo -e "#########       cleanup compute node and exit               ############"
 	            cp -R /state/partition1/$SampleName $rootdir
 	            #rm -r /dev/shm/${USER}/refdir
-	            rm -r state/partition1/$SampleName/	        
+	            rm -r /state/partition1/$SampleName/	        
                     exit $exitcode;
 		fi
 
@@ -306,7 +306,7 @@ fi
 	                echo -e "#########       cleanup compute node and exit                 ############"
 	                cp -R /state/partition1/$SampleName $rootdir
 	                #rm -r /dev/shm/${USER}/refdir
-	                rm -r state/partition1/$SampleName/	        
+	                rm -r /state/partition1/$SampleName/	        
                         exit 1;
                     else
                         echo -e "####### $AlignDir/${SampleName}.wdups.bam seems to be in order ###########"
@@ -317,7 +317,7 @@ fi
 	            echo -e "#########       cleanup compute node and exit                   ############"
 	            cp -R /state/partition1/$SampleName $rootdir
 	            #rm -r /dev/shm/${USER}/refdir
-	            rm -r state/partition1/$SampleName/	        
+	            rm -r /state/partition1/$SampleName/	        
                     exit 1;          
                 fi       
                 
@@ -337,7 +337,7 @@ fi
 	            echo -e "#########       cleanup compute node and exit               ############"
 	            cp -R /state/partition1/$SampleName $rootdir
 	            #rm -r /dev/shm/${USER}/refdir
-	            rm -r state/partition1/$SampleName/	        
+	            rm -r /state/partition1/$SampleName/	        
                     exit $exitcode;
 		fi
 		module unload $samblaster_mod               
@@ -370,7 +370,7 @@ fi
 	            echo -e "#########       cleanup compute node and exit              ############"
 	            cp -R /state/partition1/$SampleName $rootdir
 	            #rm -r /dev/shm/${USER}/refdir
-	            rm -r state/partition1/$SampleName/	        
+	            rm -r /state/partition1/$SampleName/	        
                     exit $exitcode;
 		fi   
 
@@ -392,7 +392,7 @@ fi
 	                echo -e "#########       cleanup compute node and exit                 ############"
 	                cp -R /state/partition1/$SampleName $rootdir
 	                #rm -r /dev/shm/${USER}/refdir
-	                rm -r state/partition1/$SampleName/	        
+	                rm -r /state/partition1/$SampleName/	        
                         exit 1;
                     else
                         echo -e "####### $AlignDir/${SampleName}.wdups.bam seems to be in order ###########"
@@ -403,7 +403,7 @@ fi
 	            echo -e "#########       cleanup compute node and exit                   ############"
 	            cp -R /state/partition1/$SampleName $rootdir
 	            #rm -r /dev/shm/${USER}/refdir
-	            rm -r state/partition1/$SampleName/	        
+	            rm -r /state/partition1/$SampleName/	        
                     exit 1;          
                 fi       
 		echo -e "\n\n##################################################################################"	     
@@ -420,7 +420,7 @@ fi
 	            echo -e "#########       cleanup compute node and exit              ############"
 	            cp -R /state/partition1/$SampleName $rootdir
 	            #rm -r /dev/shm/${USER}/refdir
-	            rm -r state/partition1/$SampleName/	        
+	            rm -r /state/partition1/$SampleName/	        
                     exit $exitcode;
 		fi 
 
@@ -444,7 +444,7 @@ fi
 	            echo -e "#########       cleanup compute node and exit              ############"
 	            cp -R /state/partition1/$SampleName $rootdir
 	            #rm -r /dev/shm/${USER}/refdir
-	            rm -r state/partition1/$SampleName/	        
+	            rm -r /state/partition1/$SampleName/	        
                     exit $exitcode;
 		fi 
 		module unload $picard_mod
@@ -461,7 +461,7 @@ fi
 	        echo -e "#########       cleanup compute node and exit                   ############"
 	        cp -R /state/partition1/$SampleName $rootdir
 	        #rm -r /dev/shm/${USER}/refdir
-	        rm -r state/partition1/$SampleName/	        
+	        rm -r /state/partition1/$SampleName/	        
                 exit 1;        
 
         fi
@@ -484,7 +484,7 @@ fi
 	            echo -e "#########       cleanup compute node and exit                 ############"
 	            cp -R /state/partition1/$SampleName $rootdir
 	            #rm -r /dev/shm/${USER}/refdir
-	            rm -r state/partition1/$SampleName/	        
+	            rm -r /state/partition1/$SampleName/	        
                     exit 1;
                 else
                     echo -e "####### $AlignDir/${SampleName}.wdups.sorted.bam seems to be in order ###########"
@@ -495,7 +495,7 @@ fi
 	        echo -e "#########       cleanup compute node and exit                   ############"
 	        cp -R /state/partition1/$SampleName $rootdir
 	        #rm -r /dev/shm/${USER}/refdir
-	        rm -r state/partition1/$SampleName/	        
+	        rm -r /state/partition1/$SampleName/	        
                 exit 1;          
         fi       
          
@@ -546,7 +546,7 @@ fi
 	                 echo -e "#########       cleanup compute node and exit                   ############"
 	                 cp -R /state/partition1/$SampleName $rootdir
 	                 #rm -r /dev/shm/${USER}/refdir
-	                 rm -r state/partition1/$SampleName/	        
+	                 rm -r /state/partition1/$SampleName/	        
  	                 exit $exitcode;
                 elif [ ! -s ${SampleName}.realignTargetCreator.list ]
  	        then
@@ -575,7 +575,7 @@ fi
 	                 echo -e "#########       cleanup compute node and exit                   ############"
 	                 cp -R /state/partition1/$SampleName $rootdir
 	                 #rm -r /dev/shm/${USER}/refdir
-	                 rm -r state/partition1/$SampleName/	        
+	                 rm -r /state/partition1/$SampleName/	        
  	                 exit $exitcode;
  	        elif [ ! -s ${SampleName}.realigned.bam ]
  	        then
@@ -584,7 +584,7 @@ fi
 	                 echo -e "#########       cleanup compute node and exit                   ############"
 	                 cp -R /state/partition1/$SampleName $rootdir
 	                 #rm -r /dev/shm/${USER}/refdir
-	                 rm -r state/partition1/$SampleName/	        
+	                 rm -r /state/partition1/$SampleName/	        
  	                 exit 1;
                 fi	
                 module unload $gatk_mod
@@ -635,7 +635,7 @@ fi
 	        echo -e "#########       cleanup compute node and exit                   ############"
 	        cp -R /state/partition1/$SampleName $rootdir
 	        #rm -r /dev/shm/${USER}/refdir
-	        rm -r state/partition1/$SampleName/	        
+	        rm -r /state/partition1/$SampleName/	        
  	                 exit $exitcode;
  	elif [ ! -s ${SampleName}.rawVariants.vcf ]
  	then
@@ -644,7 +644,7 @@ fi
 	        echo -e "#########       cleanup compute node and exit                   ############"
 	        cp -R /state/partition1/$SampleName $rootdir
 	        #rm -r /dev/shm/${USER}/refdir
-	        rm -r state/partition1/$SampleName/	         	       
+	        rm -r /state/partition1/$SampleName/	         	       
  	        exit 1;
         fi	           
         module unload $gatk_mod
@@ -682,12 +682,12 @@ fi
  	                 echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS"
 	                 echo -e "#########       cleanup compute node and exit                   ############"
 	                 #rm -r /dev/shm/${USER}/refdir
-	                 rm -r state/partition1/$SampleName/	        
+	                 rm -r /state/partition1/$SampleName/	        
  	                 exit $exitcode;
  	        else
 	                 echo -e "#########  COPY OF RESULTS FINISHED OK. cleanup compute node and exit    ###"
 	                 #rm -r /dev/shm/${USER}/refdir
-	                 rm -r state/partition1/$SampleName/	        
+	                 rm -r /state/partition1/$SampleName/	        
  	        fi
         fi
         
