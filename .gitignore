@@ -1,4 +1,6 @@
 *.runfile
 *.sampleinfo
+*.log
 \#*
 *~
+config/*/
