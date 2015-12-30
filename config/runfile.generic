@@ -1,0 +1,56 @@
+## i/o
+INPUTDIR=/home/groups/hpcbio_shared/aavalos/results/2015_Dec_09_trim
+OUTPUTDIR=
+SAMPLEINFORMATION=
+EMAIL=
+REPORTTICKET=
+
+## input metadata
+INPUTFORMAT=FASTQ
+INPUTTYPE=GENOME
+PAIRED=1
+SAMPLEID=
+SAMPLELB=illumina
+SAMPLEPL=illumina
+SAMPLEPU=TruSeq
+SAMPLESM=
+SAMPLECN=BGI
+
+
+# tools provenance
+ALIGNERTOOL=BWAMEM
+MARKDUPLICATESTOOL=PICARD
+ALIGNERMODULE=bwa/0.7.10
+PICARDMODULE=picard-tools/1.90
+PICARDIR=/home/apps/picard-tools/picard-tools-1.90
+SAMTOOLSMODULE=samtools/1.2
+SAMBLASTERMODULE=samblaster/0.1.22
+SORTMODULE=novocraft/3.02
+GATKMODULE=gatk/3.4-0
+GATKDIR=/home/apps/gatk/gatk-3.4-0
+TABIXMODULE=tabix/0.2.6
+
+## parameters and optional analyses
+ANALYSIS=VARIANT
+BWAMEMPARAMS=-M
+GATKPARMS=
+
+
+## paths to indexed and regular reference genome - DO NOT EDIT
+REFGENOMEDIR=/home/groups/hpcbio_shared/aavalos/data/ref
+REFGENOME=Amel_4.5_scaffolds.fa
+DBSNP=
+
+## pipeline source
+SCRIPTDIR=/home/groups/hpcbio_shared/aavalos/src
+
+
+## pbs resources - DO NOT EDIT
+PBSNODES=1
+PBSTHREADS=10
+PBSQUEUEEXOME=default
+PBSQUEUEWGEN=default
+PBSCPUALIGNWGEN=24:00:00
+PBSCPUALIGNEXOME=24:00:00
+PBSCPUOTHERWGEN=24:00:00
+PBSCPUOTHEREXOME=24:00:00
