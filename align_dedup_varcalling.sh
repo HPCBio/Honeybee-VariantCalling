@@ -171,7 +171,7 @@ fi
 	
         echo -e "############## this is where results will go on compute node    ##############"
         echo -e "############## they will be transferred at the end back to project folder  ###"
-        mkdir -p /state/partition1/$SampleName
+        mkdir -p /state/partition1/${USER}/$SampleName
         exitcode=$?
         echo `date`
         if [ $exitcode -ne 0 ]
@@ -181,9 +181,9 @@ fi
                 exit $exitcode;
         fi  
 
-        mkdir -p /state/partition1/$SampleName/align
-        mkdir -p /state/partition1/$SampleName/realign
-        mkdir -p /state/partition1/$SampleName/variant
+        mkdir -p /state/partition1/${USER}/$SampleName/align
+        mkdir -p /state/partition1/${USER}/$SampleName/realign
+        mkdir -p /state/partition1/${USER}/$SampleName/variant
 
 	if [ $copy2node_skip == "NO" ]
 	then
@@ -198,6 +198,7 @@ fi
                 exit $exitcode;
             fi 
             
+            chmod 770 /dev/shm/${USER}/refdir
             cp $refdir/* /dev/shm/${USER}/refdir/
             exitcode=$?
             echo `date`
@@ -217,7 +218,7 @@ fi
                 MSG="copy $refdir to COMPUTE NODE failed exitcode=$exitcode."
 	        echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS" 
 	        rm -r /dev/shm/${USER}/refdir
-	        rm -r /state/partition1/$SampleName/	        
+	        rm -r /state/partition1/${USER}/$SampleName/	        
                 exit $exitcode;            
             fi          
         else
@@ -235,10 +236,10 @@ fi
 	
 	module load $samtools_mod
 	module load $sorttool_mod
-	SampleDir_local=/state/partition1/$SampleName
-        AlignDir=/state/partition1/$SampleName/align
-        RealignDir=/state/partition1/$SampleName/realign
-        VarcallDir=/state/partition1/$SampleName/variant
+	SampleDir_local=/state/partition1/${USER}/$SampleName
+        AlignDir=/state/partition1/${USER}/$SampleName/align
+        RealignDir=/state/partition1/${USER}/$SampleName/realign
+        VarcallDir=/state/partition1/${USER}/$SampleName/variant
 
 
         echo -e "\n\n##################################################################################"  
@@ -282,9 +283,9 @@ fi
 	            echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS"
 	            
 	            echo -e "#########       cleanup compute node and exit               ############"
-	            cp -R /state/partition1/$SampleName $rootdir
+	            cp -R /state/partition1/${USER}/$SampleName $rootdir
 	            #rm -r /dev/shm/${USER}/refdir
-	            rm -r /state/partition1/$SampleName/	        
+	            rm -r /state/partition1/${USER}/$SampleName/	        
                     exit $exitcode;
 		fi
 
@@ -304,9 +305,9 @@ fi
 	                echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS" 
 	       
 	                echo -e "#########       cleanup compute node and exit                 ############"
-	                cp -R /state/partition1/$SampleName $rootdir
+	                cp -R /state/partition1/${USER}/$SampleName $rootdir
 	                #rm -r /dev/shm/${USER}/refdir
-	                rm -r /state/partition1/$SampleName/	        
+	                rm -r /state/partition1/${USER}/$SampleName/	        
                         exit 1;
                     else
                         echo -e "####### $AlignDir/${SampleName}.wdups.bam seems to be in order ###########"
@@ -315,9 +316,9 @@ fi
                     MSG="bwa mem command did not produce a file $AlignDir/${SampleName}.wdups.bam. alignment failed"
 	            echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS"
 	            echo -e "#########       cleanup compute node and exit                   ############"
-	            cp -R /state/partition1/$SampleName $rootdir
+	            cp -R /state/partition1/${USER}/$SampleName $rootdir
 	            #rm -r /dev/shm/${USER}/refdir
-	            rm -r /state/partition1/$SampleName/	        
+	            rm -r /state/partition1/${USER}/$SampleName/	        
                     exit 1;          
                 fi       
                 
@@ -335,9 +336,9 @@ fi
 	            echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS"
 	            
 	            echo -e "#########       cleanup compute node and exit               ############"
-	            cp -R /state/partition1/$SampleName $rootdir
+	            cp -R /state/partition1/${USER}/$SampleName $rootdir
 	            #rm -r /dev/shm/${USER}/refdir
-	            rm -r /state/partition1/$SampleName/	        
+	            rm -r /state/partition1/${USER}/$SampleName/	        
                     exit $exitcode;
 		fi
 		module unload $samblaster_mod               
@@ -368,9 +369,9 @@ fi
 	            echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS"
 	            
 	            echo -e "#########       cleanup compute node and exit              ############"
-	            cp -R /state/partition1/$SampleName $rootdir
+	            cp -R /state/partition1/${USER}/$SampleName $rootdir
 	            #rm -r /dev/shm/${USER}/refdir
-	            rm -r /state/partition1/$SampleName/	        
+	            rm -r /state/partition1/${USER}/$SampleName/	        
                     exit $exitcode;
 		fi   
 
@@ -390,9 +391,9 @@ fi
 	                echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS" 
 	       
 	                echo -e "#########       cleanup compute node and exit                 ############"
-	                cp -R /state/partition1/$SampleName $rootdir
+	                cp -R /state/partition1/${USER}/$SampleName $rootdir
 	                #rm -r /dev/shm/${USER}/refdir
-	                rm -r /state/partition1/$SampleName/	        
+	                rm -r /state/partition1/${USER}/$SampleName/	        
                         exit 1;
                     else
                         echo -e "####### $AlignDir/${SampleName}.wdups.bam seems to be in order ###########"
@@ -401,9 +402,9 @@ fi
                     MSG="bwa mem command did not produce a file $AlignDir/${SampleName}.nodups.bam. alignment failed"
 	            echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS"
 	            echo -e "#########       cleanup compute node and exit                   ############"
-	            cp -R /state/partition1/$SampleName $rootdir
+	            cp -R /state/partition1/${USER}/$SampleName $rootdir
 	            #rm -r /dev/shm/${USER}/refdir
-	            rm -r /state/partition1/$SampleName/	        
+	            rm -r /state/partition1/${USER}/$SampleName/	        
                     exit 1;          
                 fi       
 		echo -e "\n\n##################################################################################"	     
@@ -418,9 +419,9 @@ fi
 	            echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS" 
 
 	            echo -e "#########       cleanup compute node and exit              ############"
-	            cp -R /state/partition1/$SampleName $rootdir
+	            cp -R /state/partition1/${USER}/$SampleName $rootdir
 	            #rm -r /dev/shm/${USER}/refdir
-	            rm -r /state/partition1/$SampleName/	        
+	            rm -r /state/partition1/${USER}/$SampleName/	        
                     exit $exitcode;
 		fi 
 
@@ -442,9 +443,9 @@ fi
 	            echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS" 
 
 	            echo -e "#########       cleanup compute node and exit              ############"
-	            cp -R /state/partition1/$SampleName $rootdir
+	            cp -R /state/partition1/${USER}/$SampleName $rootdir
 	            #rm -r /dev/shm/${USER}/refdir
-	            rm -r /state/partition1/$SampleName/	        
+	            rm -r /state/partition1/${USER}/$SampleName/	        
                     exit $exitcode;
 		fi 
 		module unload $picard_mod
@@ -459,9 +460,9 @@ fi
 	        echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS" 
 
 	        echo -e "#########       cleanup compute node and exit                   ############"
-	        cp -R /state/partition1/$SampleName $rootdir
+	        cp -R /state/partition1/${USER}/$SampleName $rootdir
 	        #rm -r /dev/shm/${USER}/refdir
-	        rm -r /state/partition1/$SampleName/	        
+	        rm -r /state/partition1/${USER}/$SampleName/	        
                 exit 1;        
 
         fi
@@ -482,9 +483,9 @@ fi
 	            echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS" 
 	       
 	            echo -e "#########       cleanup compute node and exit                 ############"
-	            cp -R /state/partition1/$SampleName $rootdir
+	            cp -R /state/partition1/${USER}/$SampleName $rootdir
 	            #rm -r /dev/shm/${USER}/refdir
-	            rm -r /state/partition1/$SampleName/	        
+	            rm -r /state/partition1/${USER}/$SampleName/	        
                     exit 1;
                 else
                     echo -e "####### $AlignDir/${SampleName}.wdups.sorted.bam seems to be in order ###########"
@@ -493,9 +494,9 @@ fi
                 MSG="bwa mem command did not produce a file $AlignDir/${SampleName}.wdups.sorted.bam. alignment failed"
 	        echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS"
 	        echo -e "#########       cleanup compute node and exit                   ############"
-	        cp -R /state/partition1/$SampleName $rootdir
+	        cp -R /state/partition1/${USER}/$SampleName $rootdir
 	        #rm -r /dev/shm/${USER}/refdir
-	        rm -r /state/partition1/$SampleName/	        
+	        rm -r /state/partition1/${USER}/$SampleName/	        
                 exit 1;          
         fi       
          
@@ -544,9 +545,9 @@ fi
  	                 MSG="realignertargetcreator command failed exitcode=$exitcode. realignment for sample $SampleName stopped"
  	                 echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS"
 	                 echo -e "#########       cleanup compute node and exit                   ############"
-	                 cp -R /state/partition1/$SampleName $rootdir
+	                 cp -R /state/partition1/${USER}/$SampleName $rootdir
 	                 #rm -r /dev/shm/${USER}/refdir
-	                 rm -r /state/partition1/$SampleName/	        
+	                 rm -r /state/partition1/${USER}/$SampleName/	        
  	                 exit $exitcode;
                 elif [ ! -s ${SampleName}.realignTargetCreator.list ]
  	        then
@@ -573,18 +574,18 @@ fi
  	                 MSG="indelrealigner command failed exitcode=$exitcode. realignment for sample $SampleName stopped"
  	                 echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS" 
 	                 echo -e "#########       cleanup compute node and exit                   ############"
-	                 cp -R /state/partition1/$SampleName $rootdir
+	                 cp -R /state/partition1/${USER}/$SampleName $rootdir
 	                 #rm -r /dev/shm/${USER}/refdir
-	                 rm -r /state/partition1/$SampleName/	        
+	                 rm -r /state/partition1/${USER}/$SampleName/	        
  	                 exit $exitcode;
  	        elif [ ! -s ${SampleName}.realigned.bam ]
  	        then
  	                 MSG="${SampleName}.realigned.bam  indelrealigner file not created. realignment for sample $SampleName stopped"
  	                 echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS"
 	                 echo -e "#########       cleanup compute node and exit                   ############"
-	                 cp -R /state/partition1/$SampleName $rootdir
+	                 cp -R /state/partition1/${USER}/$SampleName $rootdir
 	                 #rm -r /dev/shm/${USER}/refdir
-	                 rm -r /state/partition1/$SampleName/	        
+	                 rm -r /state/partition1/${USER}/$SampleName/	        
  	                 exit 1;
                 fi	
                 module unload $gatk_mod
@@ -633,18 +634,18 @@ fi
  	        MSG="haplotypecaller command failed exitcode=$exitcode. variant calling for sample $SampleName stopped"
  	        echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS"
 	        echo -e "#########       cleanup compute node and exit                   ############"
-	        cp -R /state/partition1/$SampleName $rootdir
+	        cp -R /state/partition1/${USER}/$SampleName $rootdir
 	        #rm -r /dev/shm/${USER}/refdir
-	        rm -r /state/partition1/$SampleName/	        
+	        rm -r /state/partition1/${USER}/$SampleName/	        
  	                 exit $exitcode;
  	elif [ ! -s ${SampleName}.rawVariants.vcf ]
  	then
  	        MSG="${SampleName}.rawVariants.vcf  file not created. variant calling for sample $SampleName stopped"
  	        echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS"
 	        echo -e "#########       cleanup compute node and exit                   ############"
-	        cp -R /state/partition1/$SampleName $rootdir
+	        cp -R /state/partition1/${USER}/$SampleName $rootdir
 	        #rm -r /dev/shm/${USER}/refdir
-	        rm -r /state/partition1/$SampleName/	         	       
+	        rm -r /state/partition1/${USER}/$SampleName/	         	       
  	        exit 1;
         fi	           
         module unload $gatk_mod
@@ -669,25 +670,25 @@ fi
 	echo `date`
         if [ $copy2projectdir_skip == "NO" ]
         then
-                echo -e "#############    Source of results:      /state/partition1/$SampleName  #######"        
+                echo -e "#############    Source of results:      /state/partition1/${USER}/$SampleName  #######"        
                 echo -e "#############    Destination of results: $rootdir/$SampleName         #########"
             
-                cp -R /state/partition1/$SampleName $rootdir
+                cp -R /state/partition1/${USER}/$SampleName $rootdir
             
   	        exitcode=$?
  	        echo `date`
  	        if [ $exitcode -ne 0 ]
  	        then
- 	                 MSG="failed to copy results from /state/partition1/$SampleName to $outputdir "
+ 	                 MSG="failed to copy results from /state/partition1/${USER}/$SampleName to $outputdir "
  	                 echo -e "program=$scriptfile stopped at line=$LINENO.\nReason=$MSG\n$LOGS"
 	                 echo -e "#########       cleanup compute node and exit                   ############"
 	                 #rm -r /dev/shm/${USER}/refdir
-	                 rm -r /state/partition1/$SampleName/	        
+	                 rm -r /state/partition1/${USER}/$SampleName/	        
  	                 exit $exitcode;
  	        else
 	                 echo -e "#########  COPY OF RESULTS FINISHED OK. cleanup compute node and exit    ###"
 	                 #rm -r /dev/shm/${USER}/refdir
-	                 rm -r /state/partition1/$SampleName/	        
+	                 rm -r /state/partition1/${USER}/$SampleName/	        
  	        fi
         fi
         
