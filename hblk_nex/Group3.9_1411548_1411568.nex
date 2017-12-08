@@ -1,0 +1,44 @@
+#nexus
+BEGIN TAXA;
+DIMENSIONS ntax=5;
+TAXLABELS
+[1] 'hap_1'
+[2] 'hap_2'
+[3] 'hap_3'
+[4] 'hap_4'
+[5] 'hap_5'
+;
+END;
+
+BEGIN CHARACTERS;
+DIMENSIONS NCHAR=4;
+FORMAT
+datatype=STANDARD
+missing=?
+gap=-
+symbols='01'
+labels=left
+transpose=no
+interleave=no
+;
+MATRIX
+'hap_1' 1000
+'hap_2' 0000
+'hap_3' 0110
+'hap_4' 0001
+'hap_5' 0100
+;
+END;
+
+BEGIN TRAITS;
+Dimensions NTRAITS=3;
+Format labels=yes missing=? separator=Comma;
+TraitLabels gAHB AHB EHB;
+Matrix
+'hap_1' 13,16,8
+'hap_2' 2,9,7
+'hap_3' 5,1,0
+'hap_4' 2,3,3
+'hap_5' 8,1,12
+;
+END;

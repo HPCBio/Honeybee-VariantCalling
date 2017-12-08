@@ -1,0 +1,68 @@
+#nexus
+BEGIN TAXA;
+DIMENSIONS ntax=13;
+TAXLABELS
+[1] 'hap_1'
+[2] 'hap_2'
+[3] 'hap_3'
+[4] 'hap_4'
+[5] 'hap_5'
+[6] 'hap_6'
+[7] 'hap_7'
+[8] 'hap_8'
+[9] 'hap_9'
+[10] 'hap_10'
+[11] 'hap_11'
+[12] 'hap_12'
+[13] 'hap_13'
+;
+END;
+
+BEGIN CHARACTERS;
+DIMENSIONS NCHAR=11;
+FORMAT
+datatype=STANDARD
+missing=?
+gap=-
+symbols='01'
+labels=left
+transpose=no
+interleave=no
+;
+MATRIX
+'hap_1' 00010000000
+'hap_2' 01010100000
+'hap_3' 00100000000
+'hap_4' 00010000010
+'hap_5' 00100001000
+'hap_6' 00100110000
+'hap_7' 11000000000
+'hap_8' 00010000100
+'hap_9' 00011000000
+'hap_10' 11000110001
+'hap_11' 00100110001
+'hap_12' 11000001000
+'hap_13' 00100010000
+;
+END;
+
+BEGIN TRAITS;
+Dimensions NTRAITS=3;
+Format labels=yes missing=? separator=Comma;
+TraitLabels gAHB AHB EHB;
+Matrix
+'hap_1' 6,14,0
+'hap_2' 0,1,0
+'hap_3' 0,3,0
+'hap_4' 0,3,6
+'hap_5' 17,3,10
+'hap_6' 0,1,3
+'hap_7' 0,1,0
+'hap_8' 2,1,3
+'hap_9' 3,2,2
+'hap_10' 1,1,2
+'hap_11' 0,0,2
+'hap_12' 0,0,2
+'hap_13' 1,0,0
+;
+END;
